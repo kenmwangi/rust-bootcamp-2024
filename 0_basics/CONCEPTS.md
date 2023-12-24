@@ -1,4 +1,9 @@
-# Rust Primitives Types and Variables
+# Introduction
+Rust is a type-safe, highly-flexible, blazingly fast high-performance language.
+It doesn't have garbage collector since it enforces memory safety by pointing all references to valid memory.
+It prevents data races - through borrow checker that tracks object lifetime of all references in code during compile time.
+
+## Rust Primitives Types and Variables
 
 Primitive types in __Rust__ has fixed size thus stored in __stack__.
 Other types such arrays stored in heap memory.
