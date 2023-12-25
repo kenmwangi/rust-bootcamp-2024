@@ -27,7 +27,27 @@ fn main() {
     println!("X is {}, Y is {}", x, y);
 }
 ```
+### Casting
+Rust does not have implicit type conversion for its primitive types. For instance you cannot multiply f64 and i32
+let area = 3.14 * 12 // no implicit type conversion.
 
+Explicit type conversion (casting) using as keyword can fix this problem as show
+n in the code example below
+
+```rust
+
+const PI: f64 = 3.14;
+
+fn main() {
+    let radius = 44;
+    // explicit type conversion (Casting) using as keyword
+    // convert PI f64 into i32
+    let area = PI as i32 * radius * radius;
+
+    println!("The area of the circle is: {}", area);
+}
+
+```
 ## Tuples, Arrays and Slices
 
 __NB__: Arrays and tuples composed of primitives types are primitives considering they have fixed size.
