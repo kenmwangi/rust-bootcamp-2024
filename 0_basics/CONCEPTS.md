@@ -112,8 +112,20 @@ Heap memory always has one owner and once that owner gets out of scope, the memo
 
 Rust software is fast since memory allocation will be de-allocated once the purpose is accomplished. 
 
-__Rule of Thumb__: a value can only have one owner.
+### Ownership Rules
+ - Each value in Rust has an owner.
+ - There can only be one owner at a time.
+ - When the owner goes out of scope,the value will be dropped.
 
+### The Stack and Heap
+Both stack and heap are parts of memory but they are structured in different ways.
+
+1. __Stack__ stores values in the order it gets them and removes values in the opposite order, *last in, first out* (LIFO).
+Adding data is *pushing onto the stack*.
+Removing data is *popping off the stack*.
+All data stored on the stack must have fixed size.
+
+2. __Heap__ less organized and when you put data into heap, you request amount of space. Memory allocator finds an empty spot in heap big enough and it returns a *pointer* - address of that location in a process called *allocation on the heap*. Pointer is stored in stack since pointer to the heap has fixed size.
 
 ## Giving References to Functions
 
