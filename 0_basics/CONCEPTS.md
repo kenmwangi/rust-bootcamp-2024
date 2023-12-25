@@ -40,6 +40,46 @@ fn main() {
 
 ```
 
+## Example code using fibonacci series
+
+```rust
+// Generate the nth Fibonacci number
+// Fibonacci series - sequence of number in which each number is the sum of two preceding ones.
+use std::io;
+
+fn fibonacci(n: i32) -> i32 {
+    if n == 0 {
+        return 0;
+    }
+    if n == 1 {
+        return 1;
+    }
+
+    fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+fn main() {
+    println!("Enter a number");
+
+    let mut number = String::new();
+
+    io::stdin()
+        .read_line(&mut number)
+        .expect("Failed to read line");
+
+    let number: i32 = number.trim().parse().expect("Invalid number");
+
+    if number < 0 {
+        panic!("Invalid number for Fibonacci");
+    }
+
+    println!("Fibonacci of {} is {}", number, fibonacci(number));
+}
+
+```
+
+
+
 # Managing Memory in Rust
 =========================
 
