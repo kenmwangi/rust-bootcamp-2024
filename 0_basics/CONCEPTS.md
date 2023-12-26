@@ -281,7 +281,7 @@ if you want to borrow,use a reference. For example, String for owned type, &str 
 
 - `fn func_name(variable: String)` - takes String and owns it. If it doesn't return anything, then variable dies inside the function.
 - `fn fun_name(variable: &String)` - borrows String and can look at it. Variable doesn't die inside the function.
-- `fn func_name(variable: &mut String) - borrows String and can change it. Variable doesn't die inside the function.
+- `fn func_name(variable: &mut String)` - borrows String and can change it. Variable doesn't die inside the function.
 
 ## Borrowing
 
