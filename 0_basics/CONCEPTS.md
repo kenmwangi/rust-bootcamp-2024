@@ -303,4 +303,76 @@ fn print_vector(x: &Vec<i32>) {
 
 Vector is a resizable (dynamic) data structure that stores list of elements of same type. Vec is heap-allocated growable data structure.
 
+Example code of Vector created using vec! macro
+
+``` rust
+// Vector using vec! macro
+fn main() {
+    let v = vec![1, 2, 4];
+
+    println!("vector = {:?}", v);
+}
+```
+
+### Rust Box
+
+`Box` type is a smart pointer that allows storing values on heap rather than the stack.
+
+#### Benefits of Box Type
+
+1. Dynamically-sized Types
+
+Box type allow storing values for dynamically-sized kinds on heap. for xample
+
+```rust
+fn main() {
+    let s = Box::new("Hellom Box");
+    println!("s = {}", s);
+}
+```
+
+2. Ownership and Borrowing
+
+`Box` allows transfer of ownership of value between and functions.
+
+``` rust
+fn main() {
+    let a = Box::new(5);
+    let b = a;
+    println!("a = {}", a); // error a already moved - not in scope
+    println!("b = {}", b);
+}
+
+```
+3. Dereferencing a Box
+
+Box as smart pointer that implements the `Deref` trait therefore it can be dereferenced like a regular reference. To dereference a `Box` you ccan use the __*__ or `deref` method.
+
+```rust
+
+fn main() {
+    let x = Box::new(5);
+    let y = *x;
+    let z = std::ops::Deref::deref(&x);
+
+    println!("y = {}, z = {}", y, z);
+}
+```
+
+### Using Box to Point data on the Heap
+
+A common use of Box is to create a pointer to data on heap.
+
+``` rust
+fn main() {
+    let b = Box::new("hello".to_string());
+
+    println!("{}", b);
+}
+```
+
+### Using Box to store data in Recursive data structure
+
+`Box` stores data in a recursive data structure such as binary tree or linked list. Considering that data size is in recursive structure thus unknown at compile time, pointer is used to store data on heap rather than being included directly in structure.
+
 
