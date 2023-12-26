@@ -127,6 +127,149 @@ All data stored on the stack must have fixed size.
 
 2. __Heap__ less organized and when you put data into heap, you request amount of space. Memory allocator finds an empty spot in heap big enough and it returns a *pointer* - address of that location in a process called *allocation on the heap*. Pointer is stored in stack since pointer to the heap has fixed size.
 
+To avoid deep copy of heap data of __String__ we can use the *clone* method as 
+shown in the example code below:
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {s1}, s2 = {s2}");
+}
+```
+
+### Stack-Only Data Copy
+
+Data stored in stack such as integers can be copied with *clone* method since we already know size of integers at compile time.
+
+``` rust
+
+fn main(){
+  let x = 2;
+  let y = x;
+
+  println!("x = {x}, y={y}");
+}
+```
+
+## Ownership & Functions
+
+Passing values in functions acts same as assigning value to a variable.
+
+```rust
+fn takes_ownership(some_string: String) {
+    println!("{some_string}");
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("{some_integer}");
+}
+fn main() {
+    let s = String::from("Hello");
+
+    takes_ownership(s);
+
+    let x = 5;
+    makes_copy(x);
+}
+```
+
+### Copy, Move and Clone
+
+1. Copy - type with fixed size (primitive types) stored in stack are easily copied to crete new,independent variable. Copying stack memory is cheap and fast
+
+```rust
+let x = "hello";
+let y = x;
+println!("{}", x);
+println!("{}", y);
+
+```
+2. Move - transfer ownership of memory to another owner.
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;
+}
+
+```
+
+`String` is made up of three parts which are stored on the stack
+- Pointer - points to the memory holding string contents.
+- Length - how much memory, in bytes.
+- Capacity - total amount of memory, in bytes, that String gets from the allocator.
+
+3. Clone - deeply copy heap data of the String not just stack data.
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {}, s2 = {}", s1, s2);
+}
+```
+with `clone` method, heap data is copied into `s2`
+
+### Moving ownership
+There are 3 ways to transfer ownership from one variable to another in Rust.
+
+1. __Assigning value of one variable to another variable__
+
+```rust
+let s = String::from("Move ownership");
+let s1 = s // moved ownership to s
+```
+2. __Passing value to a function__
+
+```rust
+fn move_ownership(some_string: String) {
+    // some_string comes into scope
+    println!("{}", some_string);
+} // some_string goes out of scope and "drop" called
+
+// Memory is freed
+
+fn makes_copy(some_integer: i32) {
+    // some_integer comes into scope
+    println!("{}", some_integer);
+} // some_integer goes out of scope
+
+fn main() {
+    let s = String::from("hello");
+    move_ownership(s); // s values moves into function so longer valid
+
+    let x = 5; // x comes into scope
+
+    makes_copy(x);
+}
+```
+
+3. __Returning from a function__
+
+``` rust
+fn gives_ownership() -> String {
+    let some_string = String::from("yours");
+
+    some_string
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
+}
+
+fn main() {
+    let s1 = gives_ownership();
+
+    let s2 = String::from("Hello");
+
+    let s3 = takes_and_gives_back(s2);
+}
+
+```
+
 ## Giving References to Functions
 
 Remember, in Rust a value can only have one owner.
@@ -136,7 +279,21 @@ if you want to borrow,use a reference. For example, String for owned type, &str 
 - `fn fun_name(variable: &String)` - borrows String and can look at it. Variable doesn't die inside the function.
 - `fn func_name(variable: &mut String) - borrows String and can change it. Variable doesn't die inside the function.
 
+## Borrowing
 
+When we borrow a value, we reference its memory address with `&` operator. The `&` is called `reference`.
+
+``` rust
+fn main() {
+    let v = vec![10, 20, 30];
+    print_vector(&v);
+    println!("{}", v[0]);
+}
+
+fn print_vector(x: &Vec<i32>) {
+    println!("Inside print_vector function {:?}", x);
+}
+```
 
 
 
