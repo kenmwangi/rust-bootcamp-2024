@@ -52,12 +52,16 @@ fn main() {
 
 __NB__: Arrays and tuples composed of primitives types are primitives considering they have fixed size.
 
-```rust
-fn main() {
-    let my_tuple: (u32, f64, bool) = (4, 3.14, true);
-    let my_array: [i8; 3] = [1, 2, 3];
-}
+Array fixed size is know during compile time hence allocated on the stack. The size of array is determined by number of elements specified in that array.
 
+
+```rust
+fn main(){
+
+let arr = [1,2,3,4,5];
+
+println!("{:?}", arr);
+}
 ```
 
 ## Example code using fibonacci series
@@ -295,6 +299,8 @@ fn print_vector(x: &Vec<i32>) {
 }
 ```
 
-This is a great introduction to Rust language.
+### Rust Vector
+
+Vector is a resizable (dynamic) data structure that stores list of elements of same type. Vec is heap-allocated growable data structure.
 
 
