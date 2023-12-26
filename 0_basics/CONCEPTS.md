@@ -295,6 +295,6 @@ fn print_vector(x: &Vec<i32>) {
 }
 ```
 
-
+This is a great introduction to Rust language.
 
 
